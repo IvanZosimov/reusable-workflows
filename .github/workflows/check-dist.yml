@@ -1,0 +1,48 @@
+name: Check dist/
+
+on:
+  workflow_call:
+    inputs:
+      folder-path:
+        required: true
+        type: string
+      build-command:
+        required: false
+        type: string
+        default: "npm run build"
+      
+
+jobs:
+  check-dist:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set Node.js 16
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16.x
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci --ignore-scripts
+
+      - name: Rebuild the folder directory
+        run: ${{inputs.build-command}}
+
+      - name: Compare the expected and actual folder directories
+        run: |
+          if [ "$(git diff --ignore-space-at-eol ${{inputs.folder-path}} | wc -l)" -gt "0" ]; then
+            echo "Detected uncommitted changes after build.  See status below:"
+            git diff
+            exit 1
+          fi
+        id: diff
+
+      # If index.js was different than expected, upload the expected version as an artifact
+      - uses: actions/upload-artifact@v3
+        if: ${{ failure() && steps.diff.conclusion == 'failure' }}
+        with:
+          name: dist
+          path: dist/
