@@ -52,4 +52,4 @@ jobs:
         if: ${{ failure() && steps.diff.conclusion == 'failure' }}
         with:
           name: dist
-          path: ${{inputs.folder-path}}
+          path: ${{inputs.dist-path}}
