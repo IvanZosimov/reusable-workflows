@@ -19,8 +19,11 @@ on:
         required: false
         default: [ 'javascript' ]
       build-command:
-        description: "Optional parameter, it needs to set up if autobuild is failing."
+        description: "Optional parameter, it needs to set up if autobuild is failing"
         type: string
+        required: false
+      shell:
+        description: "Optional parameter, set shell to use for execution of build command. Supported values are: bash, pwsh, python, sh, cmd, powershell"
         required: false
         
 
@@ -62,13 +65,11 @@ jobs:
     # ℹ️ Command-line programs to run using the OS shell.
     # 📚 See https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idstepsrun
 
-    # ✏️ If the Autobuild fails above, remove it and uncomment the following three lines
-    #    and modify them (or add more) to build your code if your project
-    #    uses a compiled language
     - name: Manual build
       if: ${{steps.autobuild.conclusion == 'failure'}}
       run: |
         ${{inputs.build-command}}
+      shell: ${{inputs.shell}}
 
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v2
