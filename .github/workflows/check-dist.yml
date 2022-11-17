@@ -9,7 +9,7 @@ on:
   workflow_call:
     inputs:
       dist-path:
-        description: "Path to the dist folder where files should be checked"
+        description: "Relative path to the dist folder where files should be checked for difference"
         required: true
         type: string
       build-command:
