@@ -15,9 +15,10 @@ on:
   workflow_call:
     inputs:
       languages:
-        description: "Optional parameter. CodeQL supports [ 'cpp', 'csharp', 'go', 'java', 'javascript', 'python', 'ruby' ]"
+        description: "Optional parameter. CodeQL supports 'cpp', 'csharp', 'go', 'java', 'javascript', 'python', 'ruby'"
         required: false
-        default: [ 'javascript' ]
+        default:
+          - 'javascript'
       build-command:
         description: "Optional parameter, it needs to set up if autobuild is failing"
         type: string
