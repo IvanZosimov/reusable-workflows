@@ -1,26 +1,19 @@
-# For most projects, this workflow file will not need changing; you simply can
-# use it in your repository.
+# For our projects, this workflow file will not need changing, it can be simply used;
 #
-# You may wish to alter this file to override the set of languages analyzed,
-# or to provide custom queries or build logic.
-#
-# ******** NOTE ********
-# We have attempted to detect the languages in your repository. Please check
-# the `language` matrix defined below to confirm you have the correct set of
-# supported CodeQL languages.
-#
+# You may wish to alter this file to provide custom queries.
+
 name: "CodeQL"
 
 on:
   workflow_call:
     inputs:
       languages:
-        description: "Optional parameter. CodeQL supports ['cpp', 'csharp', 'go', 'java', 'javascript', 'python', 'ruby']"
-        type: string
+        description: "Optional input to set languages for CodeQL check. Supported values are: 'cpp', 'csharp', 'go', 'java', 'javascript', 'python', 'ruby'. To use multiple languages use the same syntax as used in the default value."
         required: false
+        type: string
         default: "['javascript']"
       build-command:
-        description: "Optional parameter, it needs to set up if autobuild is failing"
+        description: "Optional input to specify manual build command"
         required: false
         type: string
         default: ''
@@ -62,8 +55,7 @@ jobs:
     # Autobuild attempts to build any compiled languages  (C/C++, C#, or Java).
     # If this step fails, the next step -  manual build will run. You can configure build command using corresponding input.
     - name: Autobuild
-      if: ${{!inputs.build-command}}
-      id: autobuild
+      if: ${{inputs.build-command == false}}
       uses: github/codeql-action/autobuild@v2
 
     # ℹ️ Command-line programs to run using the OS shell.
@@ -71,7 +63,7 @@ jobs:
 
     - name: Manual build
       #shell: ${{inputs.shell}}
-      if: ${{inputs.build-command}}}
+      if: ${{inputs.build-command != false}}}
       run: |
         ${{inputs.build-command}}
       
