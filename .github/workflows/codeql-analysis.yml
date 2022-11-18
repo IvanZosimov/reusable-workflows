@@ -1,5 +1,4 @@
 # For our projects, this workflow file will not need changing, it can be simply used;
-#
 # You may wish to alter this file to provide custom queries.
 
 name: "CodeQL"
@@ -12,16 +11,11 @@ on:
         required: false
         type: string
         default: "['javascript']"
+        # Learn more about CodeQL language support at https://aka.ms/codeql-docs/language-support
       build-command:
         description: "Optional input to specify manual build command"
         required: false
         type: string
-        #default: ''
-      #shell:
-        #description: "Optional parameter, set shell to use for execution of build command. Supported values are: bash, pwsh, python, sh, cmd, powershell"
-        #required: false
-        #default: "bash"
-        
 
 jobs:
   analyze:
@@ -36,7 +30,6 @@ jobs:
       fail-fast: false
       matrix:
         language: ${{fromJson(inputs.languages)}}
-        # Learn more about CodeQL language support at https://aka.ms/codeql-docs/language-support
 
     steps:
     - name: Checkout repository
@@ -47,27 +40,20 @@ jobs:
       uses: github/codeql-action/init@v2
       with:
         languages: ${{ matrix.language }}
-        # If you wish to specify custom queries, you can do so here or in a config file.
-        # By default, queries listed here will override any specified in a config file.
-        # Prefix the list here with "+" to use these queries and those in the config file.
-        # queries: ./path/to/local/query, your-org/your-repo/queries@main
 
     # Autobuild attempts to build any compiled languages  (C/C++, C#, or Java).
-    # If this step fails, the next step -  manual build will run. You can configure build command using corresponding input.
+    # If this step fails, configure a build command manually using build-command input. This command will be executed in the corresponding step.
     - name: Autobuild
       id: autobuild
-      if: ${{success() && !inputs.build-command}}
+      if: ${{!inputs.build-command}}
       uses: github/codeql-action/autobuild@v2
 
     # ℹ️ Command-line programs to run using the OS shell.
     # 📚 See https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idstepsrun
-
     - name: Manual build
-      #shell: ${{inputs.shell}}
-      if: ${{inputs.build-command && steps.autobuild.conclusion == 'skipped'}}
+      if: ${{inputs.build-command}}
       run: |
         ${{inputs.build-command}}
-      
 
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v2
