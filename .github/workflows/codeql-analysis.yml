@@ -55,6 +55,7 @@ jobs:
     # Autobuild attempts to build any compiled languages  (C/C++, C#, or Java).
     # If this step fails, the next step -  manual build will run. You can configure build command using corresponding input.
     - name: Autobuild
+      id: autobuild
       if: ${{success() && !inputs.build-command}}
       uses: github/codeql-action/autobuild@v2
 
@@ -63,7 +64,7 @@ jobs:
 
     - name: Manual build
       #shell: ${{inputs.shell}}
-      if: ${{!success() && inputs.build-command}}}
+      if: ${{steps.autobuild.conclusion == "skipped"}}}
       run: |
         ${{inputs.build-command}}
       
