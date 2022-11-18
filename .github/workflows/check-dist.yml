@@ -1,19 +1,19 @@
-# `dist/index.js` is a special file in Actions.
+# `dist` is a special directory in Actions.
 # When you reference an action with `uses:` in a workflow,
-# `index.js` is the code that will run.
-# For our project, we generate this file through a build process from other source files.
-# We need to make sure the checked-in `index.js` actually matches what we expect it to be.
+# javascript files from `dist` will run.
+# For our projects, we generate the dist through a build process from other source files.
+# We need to make sure the checked-in innards of the `dist` directory actually matches what we expect it to be.
 name: Check dist
 
 on:
   workflow_call:
     inputs:
       dist-path:
-        description: "Relative path to the dist folder where files should be checked for difference"
+        description: "Relative path to the dist folder"
         required: true
         type: string
       build-command:
-        description: "Optional input to configure build command, if the default one is not what you need"
+        description: "Optional input to configure build command in case the default one doesn't suit"
         required: false
         type: string
         default: "npm run build"
