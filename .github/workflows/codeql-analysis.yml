@@ -26,6 +26,7 @@ on:
       shell:
         description: "Optional parameter, set shell to use for execution of build command. Supported values are: bash, pwsh, python, sh, cmd, powershell"
         required: false
+        default: "bash"
         
 
 jobs:
