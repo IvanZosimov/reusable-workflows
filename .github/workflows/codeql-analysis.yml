@@ -64,7 +64,7 @@ jobs:
 
     - name: Manual build
       #shell: ${{inputs.shell}}
-      if: ${{steps.autobuild.conclusion == "skipped"}}}
+      if: ${{inputs.build-command && steps.autobuild.conclusion == 'skipped'}}
       run: |
         ${{inputs.build-command}}
       
