@@ -15,10 +15,10 @@ on:
   workflow_call:
     inputs:
       languages:
-        description: "Optional parameter. CodeQL supports 'cpp', 'csharp', 'go', 'java', 'javascript', 'python', 'ruby'"
+        description: "Optional parameter. CodeQL supports ['cpp', 'csharp', 'go', 'java', 'javascript', 'python', 'ruby']"
+        type: string
         required: false
-        default:
-          - 'javascript'
+        default: "['javascript']"
       build-command:
         description: "Optional parameter, it needs to set up if autobuild is failing"
         type: string
@@ -40,7 +40,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        language: ${{inputs.languages}}
+        language: ${{fromJson(inputs.languages)}}
         # Learn more about CodeQL language support at https://aka.ms/codeql-docs/language-support
 
     steps:
