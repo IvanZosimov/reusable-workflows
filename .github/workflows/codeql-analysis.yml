@@ -23,10 +23,10 @@ on:
         description: "Optional parameter, it needs to set up if autobuild is failing"
         type: string
         required: false
-      shell:
-        description: "Optional parameter, set shell to use for execution of build command. Supported values are: bash, pwsh, python, sh, cmd, powershell"
-        required: false
-        default: "bash"
+      #shell:
+        #description: "Optional parameter, set shell to use for execution of build command. Supported values are: bash, pwsh, python, sh, cmd, powershell"
+        #required: false
+        #default: "bash"
         
 
 jobs:
@@ -68,7 +68,7 @@ jobs:
     # 📚 See https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idstepsrun
 
     - name: Manual build
-      shell: ${{inputs.shell}}
+      #shell: ${{inputs.shell}}
       if: ${{steps.autobuild.conclusion == 'failure'}}
       run: |
         ${{inputs.build-command}}
