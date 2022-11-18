@@ -9,11 +9,12 @@ on:
   workflow_call:
     inputs:
       dist-path:
-        description: "Relative path to the dist folder"
-        required: true
+        description: "Optional input to set a path to the dist folder. If it's not set defaults to './dist'"
+        required: false
         type: string
+        default: "./dist"
       build-command:
-        description: "Optional input to configure build command in case the default one doesn't suit"
+        description: "Optional input to configure build command in case the default one doesn't suit. If it's not set defaults to 'npm run build'"
         required: false
         type: string
         default: "npm run build"
