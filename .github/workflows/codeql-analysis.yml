@@ -22,7 +22,8 @@ on:
       build-command:
         description: "Optional parameter, it needs to set up if autobuild is failing"
         required: false
-        default: false
+        type: string
+        default: ''
       #shell:
         #description: "Optional parameter, set shell to use for execution of build command. Supported values are: bash, pwsh, python, sh, cmd, powershell"
         #required: false
