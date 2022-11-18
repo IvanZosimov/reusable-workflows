@@ -16,7 +16,7 @@ on:
         description: "Optional input to specify manual build command"
         required: false
         type: string
-        default: ''
+        #default: ''
       #shell:
         #description: "Optional parameter, set shell to use for execution of build command. Supported values are: bash, pwsh, python, sh, cmd, powershell"
         #required: false
