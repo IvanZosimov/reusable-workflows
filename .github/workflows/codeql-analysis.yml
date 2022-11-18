@@ -21,8 +21,8 @@ on:
         default: "['javascript']"
       build-command:
         description: "Optional parameter, it needs to set up if autobuild is failing"
-        type: string
         required: false
+        default: false
       #shell:
         #description: "Optional parameter, set shell to use for execution of build command. Supported values are: bash, pwsh, python, sh, cmd, powershell"
         #required: false
@@ -61,6 +61,7 @@ jobs:
     # Autobuild attempts to build any compiled languages  (C/C++, C#, or Java).
     # If this step fails, the next step -  manual build will run. You can configure build command using corresponding input.
     - name: Autobuild
+      if: ${{!inputs.build-command}}
       id: autobuild
       uses: github/codeql-action/autobuild@v2
 
@@ -69,7 +70,7 @@ jobs:
 
     - name: Manual build
       #shell: ${{inputs.shell}}
-      if: ${{steps.autobuild.conclusion == 'failure'}}
+      if: ${{inputs.build-command}}}
       run: |
         ${{inputs.build-command}}
       
