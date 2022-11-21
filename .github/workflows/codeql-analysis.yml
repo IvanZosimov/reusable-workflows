@@ -1,6 +1,4 @@
-# For our projects, this workflow file will not need changing, it can be simply used;
-# You may wish to alter this file to provide custom queries.
-
+# Learn more about CodeQL language support at https://aka.ms/codeql-docs/language-support
 name: CodeQL
 
 on:
@@ -11,7 +9,6 @@ on:
         required: false
         type: string
         default: "['javascript']"
-        # Learn more about CodeQL language support at https://aka.ms/codeql-docs/language-support
       build-command:
         description: "Optional input to specify manual build command"
         required: false
@@ -48,8 +45,6 @@ jobs:
       if: ${{!inputs.build-command}}
       uses: github/codeql-action/autobuild@v2
 
-    # ℹ️ Command-line programs to run using the OS shell.
-    # 📚 See https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idstepsrun
     - name: Manual build
       if: ${{inputs.build-command}}
       run: |

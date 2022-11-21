@@ -31,7 +31,7 @@ on:
 
 jobs:
   build:
-    runs-on: ${{ matrix.operating-system }}
+    runs-on: ${{inputs.operating-systems}}
     strategy:
       fail-fast: false
       matrix:
