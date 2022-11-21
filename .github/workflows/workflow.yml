@@ -61,7 +61,7 @@ jobs:
       if: ${{inputs.disable-build}}
 
     - name: Test
-    - run: npm run test
+      run: npm run test
 
     - name: audit packages
       run: npm audit --audit-level=high
