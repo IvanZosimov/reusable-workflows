@@ -63,6 +63,6 @@ jobs:
     - name: Test
       run: npm run test
 
-    - name: audit packages
+    - name: Audit packages
       run: npm audit --audit-level=high
       if: ${{ runner.os == 'Linux' && inputs.enable-audit}}
