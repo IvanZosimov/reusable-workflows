@@ -25,9 +25,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout
+        uses: actions/checkout@v3
 
-      - name: Set Node.js 16
+      - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
           node-version: 16.x
@@ -49,8 +50,9 @@ jobs:
         id: diff
 
       # If inners of the dist directory were different than expected, upload the expected version as an artifact
-      - uses: actions/upload-artifact@v3
-        if: ${{ failure() && steps.diff.conclusion == 'failure' }}
-        with:
-          name: dist
-          path: ${{inputs.dist-path}}
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+          if: ${{ failure() && steps.diff.conclusion == 'failure' }}
+          with:
+            name: dist
+            path: ${{inputs.dist-path}}
