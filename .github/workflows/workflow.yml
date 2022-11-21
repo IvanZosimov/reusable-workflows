@@ -31,11 +31,11 @@ on:
 
 jobs:
   build:
-    runs-on: ${{inputs.operating-systems}}
+    runs-on: ${{matrix.operating-systems}}
     strategy:
       fail-fast: false
       matrix:
-        operating-system: ${{fromJson(inputs.operating-systems)}}
+        operating-systems: ${{fromJson(inputs.operating-systems)}}
     steps:
     - name: Checkout
       uses: actions/checkout@v3
