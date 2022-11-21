@@ -14,7 +14,9 @@ jobs:
     runs-on: ubuntu-latest
     name: Check licenses
     steps:
-      - uses: actions/checkout@v3
+
+      - name: Checkout
+        uses: actions/checkout@v3
 
       - name: Install dependencies
         run: npm ci --ignore-scripts
@@ -25,6 +27,6 @@ jobs:
           curl -Lfs -o licensed.tar.gz ${{inputs.licensed-url}}
           sudo tar -xzf licensed.tar.gz
           sudo mv licensed /usr/local/bin/licensed
-          
+
       - name: Check cached dependency records
         run: licensed status
