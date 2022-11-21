@@ -13,21 +13,21 @@ on:
         required: false
         type: string
         default: "['ubuntu-latest', 'windows-latest', 'macos-latest']"
-      disable-build:
-        description: "Optional input to disable building process"
+      enable-build:
+        description: "Optional input to enable building process"
         required: false
         type: boolean
-        default: false
-      disable-linter:
-        description: "Optional input to disable linting process"
+        default: true
+      enable-linter:
+        description: "Optional input to enable linting process"
         required: false
         type: boolean
-        default: false
-      disable-audit:
-        description: "Optional input to disable npm package audit process"
+        default: true
+      enable-audit:
+        description: "Optional input to enable npm package audit process"
         required: false
         type: boolean
-        default: false
+        default: true
 
 jobs:
   build:
@@ -54,15 +54,15 @@ jobs:
 
     - name: Run linter
       run: npm run lint
-      if: ${{inputs.disable-linter}}
+      if: ${{inputs.enable-linter}}
 
     - name: Build
       run: npm run build
-      if: ${{inputs.disable-build}}
+      if: ${{inputs.enable-build}}
 
     - name: Test
       run: npm run test
 
     - name: audit packages
       run: npm audit --audit-level=high
-      if: ${{ runner.os == 'Linux' && !inputs.disable-audit}}
+      if: ${{ runner.os == 'Linux' && inputs.enable-audit}}
