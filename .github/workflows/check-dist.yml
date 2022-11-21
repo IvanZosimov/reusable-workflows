@@ -18,6 +18,11 @@ on:
         required: false
         type: string
         default: "npm run build"
+      node-version:
+        description: "Optional input to set version of node.js. The input syntax corresponds to the setup-node's one."
+        required: false
+        type: string
+        default: "16.x"
       
 
 jobs:
@@ -28,10 +33,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Setup Node.js
+      - name: Setup Node.js ${{inputs.node-version}}
         uses: actions/setup-node@v3
         with:
-          node-version: 16.x
+          node-version: ${{inputs.node-version}}
           cache: npm
 
       - name: Install dependencies

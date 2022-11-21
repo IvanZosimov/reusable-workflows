@@ -1,13 +1,13 @@
 # For our projects, this workflow file will not need changing, it can be simply used;
 # You may wish to alter this file to provide custom queries.
 
-name: "CodeQL"
+name: CodeQL
 
 on:
   workflow_call:
     inputs:
       languages:
-        description: "Optional input to set languages for CodeQL check. Supported values are: 'cpp', 'csharp', 'go', 'java', 'javascript', 'python', 'ruby'. To use multiple languages use the same syntax as used in the default value."
+        description: "Optional input to set languages for CodeQL check. Supported values are: 'cpp', 'csharp', 'go', 'java', 'javascript', 'typescript', 'python', 'ruby'. To use multiple languages use the same syntax as used in the default value."
         required: false
         type: string
         default: "['javascript']"
