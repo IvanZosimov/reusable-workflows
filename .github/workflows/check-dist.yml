@@ -24,10 +24,10 @@ on:
         type: string
         default: "16.x"
       node-caching:
-        description: "Optional input to set up caching for the setup-node action. The input syntax corresponds to the setup-node's one."
+        description: "Optional input to set up caching for the setup-node action. The input syntax corresponds to the setup-node's one. Set to an empty string if caching isn't needed"
         required: false
         type: string
-        default: ""
+        default: "npm"
       
 
 jobs:
