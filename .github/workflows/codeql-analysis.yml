@@ -1,4 +1,7 @@
-# Learn more about CodeQL language support at https://aka.ms/codeql-docs/language-support
+# This workflow helps us to analize repository code for vulnerabilities, bugs, and other errors using CodeQL. 
+# For that we're using CodeQL Action: https://github.com/github/codeql-action
+# Learn more about CodeQL at https://codeql.github.com/
+
 name: CodeQL
 
 on:
@@ -41,7 +44,6 @@ jobs:
     # Autobuild attempts to build any compiled languages  (C/C++, C#, or Java).
     # If this step fails, configure a build command manually using build-command input. This command will be executed in the corresponding step.
     - name: Autobuild
-      id: autobuild
       if: ${{!inputs.build-command}}
       uses: github/codeql-action/autobuild@v2
 
