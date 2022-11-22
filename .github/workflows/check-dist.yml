@@ -61,7 +61,7 @@ jobs:
 
       # If inners of the dist directory were different than expected, upload the expected version as an artifact
       - name: Upload artifact
-        if: ${{ failure() && steps.diff.conclusion == 'failure' }}
+        if: ${{failure() && steps.diff.conclusion == 'failure'}}
         uses: actions/upload-artifact@v3
         with:
           name: dist
