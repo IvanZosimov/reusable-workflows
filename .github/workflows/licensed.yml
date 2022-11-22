@@ -10,7 +10,7 @@ on:
         description: "Optional input to set the url of the required version of the Licenced tool"
         required: false
         type: string
-        default: "https://github.com/github/licensed/releases/download/3.4.4/licensed-3.4.4-linux-x64.tar.gz"
+        default: "https://github.com/github/licensed/releases/download/3.9.0/licensed-3.9.0-linux-x64.tar.gz"
 
 jobs:
   validate-cached-dependency-records:

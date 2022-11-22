@@ -3,7 +3,7 @@
 # 2. Is linted
 # 3. Successfully builds
 # 4. Passes unit-tests
-
+# Additionally node packages used by the action can be audited.
 name: CI
 
 on:
@@ -15,7 +15,7 @@ on:
         type: string
         default: "['ubuntu-latest', 'windows-latest', 'macos-latest']"
       build-command:
-        description: "Optional input to configure build command in case the default one doesn't suit. Set to an empty string if build isn't needed"
+        description: "Optional input to configure build command in case the default one doesn't suit. Set to an empty string if build isn't needed. Multiline syntax is supported"
         required: false
         type: string
         default: "npm run build"
@@ -74,8 +74,8 @@ jobs:
       run: npm run lint
 
     - name: Build
-      if: ${{inputs.enable-build}}
-      run: ${{inputs.enable-build}}
+      if: ${{inputs.build-command}}
+      run: ${{inputs.build-command}}
 
     - name: Test
       run: npm run test
