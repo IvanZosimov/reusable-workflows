@@ -7,6 +7,11 @@ name: CodeQL
 on:
   workflow_call:
     inputs:
+      languages:
+        description: "Optional input to set languages for CodeQL check. Supported values are: 'cpp', 'csharp', 'go', 'java', 'javascript', 'typescript', 'python', 'ruby'"
+        required: false
+        type: string
+        default: "javascript"
       codeql-cfg-path:
         description: "Optional input to set path to a CodeQL config file"
         required: false
@@ -38,6 +43,7 @@ jobs:
       if: ${{inputs.codeql-cfg-path}}
       uses: github/codeql-action/init@v2
       with:
+        languages: ${{inputs.languages}}
         config-file: ${{inputs.codeql-cfg-path}}
 
     # Autobuild attempts to build any compiled languages  (C/C++, C#, or Java).
