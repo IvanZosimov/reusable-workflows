@@ -38,13 +38,8 @@ jobs:
     - name: Initialize CodeQL
       if: ${{!inputs.codeql-cfg-path}}
       uses: github/codeql-action/init@v2
-
-    - name: Initialize CodeQL with config file
-      if: ${{inputs.codeql-cfg-path}}
-      uses: github/codeql-action/init@v2
       with:
         languages: ${{inputs.languages}}
-        config-file: ${{inputs.codeql-cfg-path}}
 
     # Autobuild attempts to build any compiled languages  (C/C++, C#, or Java).
     # If this step fails, configure a build command manually using build-command input. This command will be executed in the corresponding step.
