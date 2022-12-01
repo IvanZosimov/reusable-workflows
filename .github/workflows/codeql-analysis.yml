@@ -42,7 +42,7 @@ jobs:
     - name: Initialize CodeQL with config file
       uses: github/codeql-action/init@v2
       with:
-        config-file: ${{inputs.codeql-cfg-path}}
+        #config-file: ${{inputs.codeql-cfg-path}}
         languages: ${{matrix.language}}
 
     # Autobuild attempts to build any compiled languages  (C/C++, C#, or Java).
