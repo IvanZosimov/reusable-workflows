@@ -11,7 +11,7 @@ on:
         description: "Optional input to set languages for CodeQL check. Supported values are: 'cpp', 'csharp', 'go', 'java', 'javascript', 'typescript', 'python', 'ruby'. To use multiple languages use the same syntax as used in the default value."
         required: false
         type: string
-        default: "['javascript']"
+        default: "['javascript', 'typescript']"
       codeql-cfg-path:
         description: "Optional input to set path to a CodeQL config file"
         required: false
@@ -29,11 +29,10 @@ jobs:
       actions: read
       contents: read
       security-events: write
-
     strategy:
       fail-fast: false
       matrix:
-        language: ${{ fromJson(inputs.languages) }}
+        language: ${{fromJson(inputs.languages)}} 
 
     steps:
     - name: Checkout
