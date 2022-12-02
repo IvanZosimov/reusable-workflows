@@ -1,4 +1,4 @@
-# This workflow helps to check statuses of cached dependencies used in the action with help of the Licensed tool.
+# This workflow helps to check the statuses of cached dependencies used in action with the help of the Licensed tool.
 # Learn more about Licensed at https://github.com/github/licensed
 
 name: Licensed
@@ -24,5 +24,6 @@ jobs:
           curl -Lfs -o licensed.tar.gz https://github.com/github/licensed/releases/download/3.9.0/licensed-3.9.0-linux-x64.tar.gz 
           sudo tar -xzf licensed.tar.gz
           sudo mv licensed /usr/local/bin/licensed
+
       - name: Check cached dependency records
         run: licensed status
