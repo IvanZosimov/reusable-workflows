@@ -29,21 +29,22 @@ jobs:
       actions: read
       contents: read
       security-events: write
+
     strategy:
       fail-fast: false
       matrix:
-        language: ${{fromJson(inputs.languages)}} 
-    
+        language: ${{fromJson(inputs.languages)}}
+
     steps:
     - name: Checkout
       uses: actions/checkout@v3
 
     # Initializes the CodeQL tools for scanning.
-    - name: Initialize CodeQL with config file
+    - name: Initialize CodeQL
       uses: github/codeql-action/init@v2
       with:
-        config-file: ${{inputs.codeql-cfg-path}}
         languages: ${{matrix.language}}
+        config-file: ${{inputs.codeql-cfg-path}}
 
     # Autobuild attempts to build any compiled languages  (C/C++, C#, or Java).
     # If this step fails, configure a build command manually using build-command input. This command will be executed in the corresponding step.
@@ -55,6 +56,5 @@ jobs:
       if: ${{inputs.build-command}}
       run: |
         ${{inputs.build-command}}
-
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v2
